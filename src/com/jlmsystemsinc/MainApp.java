@@ -32,6 +32,17 @@ public class MainApp extends Application {
 	private ObservableList<EmployeeData> employeeDataList = FXCollections.observableArrayList();
 	private Stage primaryStage;
 
+	public MainApp() {
+		// init employee data
+//		try {
+//			loadEmployeeDatabase();
+//		} catch (IOException e) {
+//			logger.error(e);
+//		}
+	}
+
+	
+
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

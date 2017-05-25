@@ -1,22 +1,25 @@
 package com.jlmsystemsinc.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jlmsystemsinc.StaticValues;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+
 public class EmployeeData {
-
+	@JsonProperty(StaticValues.Employee.NUMBER)
 	private StringProperty empno;
+	@JsonProperty(StaticValues.Employee.NAME)
 	private StringProperty name;
+	@JsonProperty(StaticValues.Employee.EMAIL)
 	private StringProperty email;
-	private StringProperty filename;
-	private StringProperty ptoInformation;
+	
 
-	public EmployeeData(String empno, String name, String email, String filename, String ptoInformation) {
+	public EmployeeData(String empno, String name, String email) {
 		this.empno = new SimpleStringProperty(empno);
 		this.name = new SimpleStringProperty(name);
 		this.email = new SimpleStringProperty(email);
-		this.filename = new SimpleStringProperty(filename);
-		this.ptoInformation = new SimpleStringProperty(ptoInformation);
 	}
 
 	public String getEmpno() {
@@ -41,7 +44,6 @@ public class EmployeeData {
 
 	public void setName(String name) {
 		this.name.set(name);
-		;
 	}
 
 	public String getEmail() {
@@ -54,32 +56,7 @@ public class EmployeeData {
 
 	public void setEmail(String email) {
 		this.email.set(email);
-		;
 	}
 
-	public String getFilename() {
-		return filename.get();
-	}
-
-	public StringProperty getFilenameProperty() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename.set(filename);
-		;
-	}
-
-	public String getPtoInformation() {
-		return ptoInformation.get();
-	}
-
-	public StringProperty getPtoInformationProperty() {
-		return ptoInformation;
-	}
-
-	public void setPtoInformation(String ptoInformation) {
-		this.ptoInformation.set(ptoInformation);;
-	}
 
 }
