@@ -18,11 +18,9 @@
                <children>
                   <TableView fx:id="employeeTable" layoutX="71.0" layoutY="64.0" prefHeight="298.0" prefWidth="386.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="EMPNO" />
-                      <TableColumn prefWidth="75.0" text="NAME" />
-                        <TableColumn prefWidth="75.0" text="EMAIL" />
-                        <TableColumn prefWidth="75.0" text="PTO" />
-                        <TableColumn prefWidth="85.0" text="FILE" />
+                      <TableColumn fx:id="empnoColumn" prefWidth="75.0" text="EMPNO" />
+                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="NAME" />
+                        <TableColumn fx:id="emailColumn" prefWidth="75.0" text="EMAIL" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -51,7 +49,7 @@
                         <Label prefHeight="17.0" prefWidth="82.0" text="Payroll Pdf file" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" onMouseClicked="#handleGetPtoData" text="Get" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="PTO Data xls" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" text="Set" GridPane.columnIndex="2" />
+                        <Button mnemonicParsing="false" onMouseClicked="#handleSetEmployeeData" text="Set" GridPane.columnIndex="2" />
                         <Button mnemonicParsing="false" text="Set" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" text="Set" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                      </children>

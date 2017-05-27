@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jlmsystemsinc.controller.PtoOverviewController">
+   <children>
+      <TableView fx:id="ptoTable" layoutX="158.0" layoutY="107.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="EMPNO" />
+          <TableColumn prefWidth="132.0" text="NAME" />
+            <TableColumn prefWidth="116.0" text="AVAILABLE" />
+            <TableColumn prefWidth="136.0" text="USED" />
+            <TableColumn prefWidth="140.0" text="LEFT" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

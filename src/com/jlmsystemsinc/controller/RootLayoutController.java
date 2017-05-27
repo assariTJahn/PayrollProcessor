@@ -2,22 +2,11 @@ package com.jlmsystemsinc.controller;
 
 import java.io.File;
 
-import com.jlmsystemsinc.MainApp;
-
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 
-public class RootLayoutController {
+public class RootLayoutController extends AbstractController{
 
-	private MainApp mainApp;
-
-	public MainApp getMainApp() {
-		return mainApp;
-	}
-
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
 
 	@FXML
 	private void handleOpen() {

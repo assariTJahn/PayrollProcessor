@@ -15,11 +15,12 @@ public class EmployeeData {
 	@JsonProperty(StaticValues.Employee.EMAIL)
 	private StringProperty email;
 	
+	public EmployeeData() {}
 
 	public EmployeeData(String empno, String name, String email) {
-		this.empno = new SimpleStringProperty(empno);
-		this.name = new SimpleStringProperty(name);
-		this.email = new SimpleStringProperty(email);
+		this.empno = new SimpleStringProperty(empno!=null?empno:StaticValues.Employee.NUMBER+" not found");
+		this.name = new SimpleStringProperty(name!=null?name:StaticValues.Employee.NAME+" not found");
+		this.email = new SimpleStringProperty(email!=null?email:StaticValues.Employee.EMAIL+" not found");
 	}
 
 	public String getEmpno() {

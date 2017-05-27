@@ -2,27 +2,23 @@ package com.jlmsystemsinc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.ss.usermodel.Cell;
 
 import com.jlmsystemsinc.MainApp;
 import com.jlmsystemsinc.StaticValues;
 import com.jlmsystemsinc.model.EmployeeData;
 import com.jlmsystemsinc.parser.xml.BuildXlsxFile;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 
-public class PayrollOverviewController {
+public class PayrollOverviewController extends AbstractController{
 	Logger logger = LogManager.getLogger(PayrollOverviewController.class);
 
 	String[] PTO_HEADER = { StaticValues.Pto.AVAILABLE, StaticValues.Pto.USED, StaticValues.Pto.LEFT };
@@ -36,10 +32,6 @@ public class PayrollOverviewController {
 	private TableColumn<EmployeeData, String> nameColumn;
 	@FXML
 	private TableColumn<EmployeeData, String> emailColumn;
-	@FXML
-	private TableColumn<EmployeeData, String> ptoColumn;
-	@FXML
-	private TableColumn<EmployeeData, String> fileColumn;
 
 	@FXML
 	private Label empnoLabel;
@@ -52,21 +44,18 @@ public class PayrollOverviewController {
 	@FXML
 	private Label fileLabel;
 
-	private MainApp mainApp;
 
 	public PayrollOverviewController() {
 	}
 
 	@FXML
-	private void intialize() {
+	private void initialize() {
 		empnoColumn.setCellValueFactory(cellData -> cellData.getValue().getEmpnoProperty());
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
 		emailColumn.setCellValueFactory(cellData -> cellData.getValue().getEmailProperty());
 	}
 
-	public MainApp getMainApp() {
-		return mainApp;
-	}
+	
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -76,7 +65,7 @@ public class PayrollOverviewController {
 	@FXML
 	private void handleGetEmployeeData() {
 		String[] header = EMP_HEADER;
-		BuildXlsxFile bxf = new BuildXlsxFile(1, header.length, header);
+		BuildXlsxFile bxf = new BuildXlsxFile(1, header);
 		File file = fileChooserForSave("employee_data.xlsx", "Excel Files (*.xlsx)", "*.xlsx");
 		// fileLabel.setText(file.getName());
 		try {
@@ -111,17 +100,15 @@ public class PayrollOverviewController {
 	@FXML
 	private void handleSetEmployeeData() {
 		String[] header = EMP_HEADER;
-		BuildXlsxFile bxf = new BuildXlsxFile(1, header.length, header);
-		List<Map<String, String>> list = new ArrayList<>();
-		bxf.parse(fileChooserForOpen("employee_data.xlsx", "Excel Files (*.xlsx)", "*.xlsx"), row -> {
-			int idx = 0;
-			Map<String, String> map = new HashMap<>();
-			for (Cell cell : row) {
-				map.put(header[idx++], cell.getStringCellValue());
-			}
-			list.add(map);
+		BuildXlsxFile bxf = new BuildXlsxFile(1, header);
+		ObservableList<EmployeeData> list = mainApp.getEmployeeDataList();
+		bxf.parse(fileChooserForOpen("employee_data.xlsx", "Excel Files (*.xlsx)", "*.xlsx"), map -> {
+			list.add(new EmployeeData(map.get(StaticValues.Employee.NUMBER), map.get(StaticValues.Employee.NAME), map.get(StaticValues.Employee.EMAIL)));
 		});
+		employeeTable.setItems(mainApp.getEmployeeDataList());
 	}
+	
+	
 
 	/**
 	 * open dialog for openning pto data file
@@ -129,7 +116,7 @@ public class PayrollOverviewController {
 	@FXML
 	private void handleSetPtoData() {
 		String[] header = PTO_HEADER;
-		BuildXlsxFile bxf = new BuildXlsxFile(1, header.length, header);
+		BuildXlsxFile bxf = new BuildXlsxFile(1, header);
 		try {
 			bxf.build(fileChooserForOpen("pto_form.xlsx", "Excel Files (*.xlsx)", "*.xlsx"));
 		} catch (IOException e) {
@@ -143,7 +130,7 @@ public class PayrollOverviewController {
 	@FXML
 	private void handleGetPtoData() {
 		String[] header = PTO_HEADER;
-		BuildXlsxFile bxf = new BuildXlsxFile(1, header.length, header);
+		BuildXlsxFile bxf = new BuildXlsxFile(1, header);
 		try {
 			bxf.build(fileChooserForSave("pto_form.xlsx", "Excel Files (*.xlsx)", "*.xlsx"));
 		} catch (IOException e) {
